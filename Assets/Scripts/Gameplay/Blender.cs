@@ -10,8 +10,12 @@ public class Blender : MonoBehaviour
     private Color resultColor;
     private bool blendingIsInProgress;
 
-    public delegate void BlenderStatus();
-    public static event BlenderStatus blenderIsAvaible;
+    public delegate void BlenderAvaibility();
+    public static event BlenderAvaibility blenderIsAvaible;
+
+    public delegate void BlenderResults(int result);
+    public static event BlenderResults colorIsSimilarToRequired;
+    public static event BlenderResults colorIsNotSimilarToRequired;
 
     private void Start()
     {
@@ -56,7 +60,17 @@ public class Blender : MonoBehaviour
 
     private void CheckColorForRequired()
     {
-        float colorSimilarity = Vector3.Distance(new Vector3(requiredColor.r, requiredColor.g, requiredColor.b), new Vector3(resultColor.r, resultColor.g, resultColor.b));
+        float colorSimilarity = 100-Mathf.Abs(Vector3.Distance(new Vector3(requiredColor.r, requiredColor.g, requiredColor.b), new Vector3(resultColor.r, resultColor.g, resultColor.b))*100);
+
+        if(colorSimilarity<0.1)
+        {
+            colorIsSimilarToRequired((int)colorSimilarity);
+        }
+        else
+        {
+            colorIsNotSimilarToRequired((int)colorSimilarity);
+        }
+
         Debug.Log(colorSimilarity);
     }
 

@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelInformation[] levelInfo;
     [SerializeField] private Blender blenderObject;
     [SerializeField] private Image requiredCocktailImage;
+    [SerializeField] private GameUIManager UIManager;
 
     public int currentLevel = 0;
 
@@ -28,19 +29,22 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-    private void LevelIsCompleted()
+    private void LevelIsCompleted(int resultScore)
     {
-
+        currentLevel++;
+        UIManager.ShowWonScreen(resultScore);
     }
 
-    private void LevelIsFailed()
+    private void LevelIsFailed(int resultScore)
     {
-
+        UIManager.ShowLostScreen(resultScore);
     }
 
     private void OnEnable()
     {
         CameraIntroAnimation.introFinished += StartLevel;
+        Blender.colorIsSimilarToRequired += LevelIsCompleted;
+        Blender.colorIsNotSimilarToRequired += LevelIsFailed;
         
     }
 }
