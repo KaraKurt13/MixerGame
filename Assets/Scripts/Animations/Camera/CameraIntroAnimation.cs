@@ -24,15 +24,15 @@ public class CameraIntroAnimation : MonoBehaviour
     private void PlayIntroAnimation()
     {
         Sequence cameraSequance = DOTween.Sequence();
+
         cameraSequance.Append(Camera.main.transform.DOMove(firstStepCameraPosition, firstAnimationDuration, false))
             .Join(Camera.main.transform.DORotate(firstStepCameraRotation, firstAnimationDuration));
-
-        cameraSequance.OnComplete(() => {
 
         cameraSequance.Append(Camera.main.transform.DOMove(secondStepCameraPosition, secondAnimationDuration))
             .Join(Camera.main.transform.DORotate(secondStepCameraRotation, secondAnimationDuration));
 
+        cameraSequance.OnComplete(() => {
+            introFinished();
         });
-
     }
 }

@@ -8,6 +8,8 @@ public class FridgeIntroAnimation : MonoBehaviour
     [SerializeField] private float delayBeforeAnim;
     [SerializeField] private float animDuration;
 
+    public delegate void FridgeAnim();
+    public static event FridgeAnim fridgeAnimationEnded;
     private void Start()
     {
         StartCoroutine(PlayAnimation());
@@ -19,5 +21,10 @@ public class FridgeIntroAnimation : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeAnim);
         Sequence cameraSequance = DOTween.Sequence();
         cameraSequance.Append(this.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), animDuration));
+
+        cameraSequance.OnComplete(()=>
+        {
+            fridgeAnimationEnded();
+        });
     }
 }
