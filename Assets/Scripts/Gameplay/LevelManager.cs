@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private LevelInformation[] levelInfo;
@@ -12,7 +14,7 @@ public class LevelManager : MonoBehaviour
 
     private void StartLevel()
     {
-        requiredCocltailImage.sprite = levelInfo[currentLevel].coctailSprite;
+        requiredCocktailImage.sprite = levelInfo[currentLevel].coctailSprite;
         blenderObject.requiredColor = levelInfo[currentLevel].requiredColor;
     }
 
@@ -22,6 +24,10 @@ public class LevelManager : MonoBehaviour
         StartLevel();
     }
 
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
     private void LevelIsCompleted()
     {
 

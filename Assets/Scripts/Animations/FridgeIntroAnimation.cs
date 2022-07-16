@@ -10,19 +10,22 @@ public class FridgeIntroAnimation : MonoBehaviour
 
     public delegate void FridgeAnim();
     public static event FridgeAnim fridgeAnimationEnded;
+
     private void Start()
     {
-        StartCoroutine(PlayAnimation());
+        PlayAnimation();
     }
 
 
-    private IEnumerator PlayAnimation()
+    private void PlayAnimation()
     {
-        yield return new WaitForSeconds(delayBeforeAnim);
-        Sequence cameraSequance = DOTween.Sequence();
-        cameraSequance.Append(this.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), animDuration));
+        Sequence fridgeSequence = DOTween.Sequence();
 
-        cameraSequance.OnComplete(()=>
+        fridgeSequence.AppendInterval(delayBeforeAnim);
+
+        fridgeSequence.Append(this.gameObject.transform.DOLocalRotate(new Vector3(0, 0, 0), animDuration));
+
+        fridgeSequence.OnComplete(()=>
         {
             fridgeAnimationEnded();
         });

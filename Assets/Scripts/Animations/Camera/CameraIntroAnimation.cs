@@ -25,6 +25,8 @@ public class CameraIntroAnimation : MonoBehaviour
     {
         Sequence cameraSequance = DOTween.Sequence();
 
+        cameraSequance.AppendInterval(0.3f);
+
         cameraSequance.Append(Camera.main.transform.DOMove(firstStepCameraPosition, firstAnimationDuration, false))
             .Join(Camera.main.transform.DORotate(firstStepCameraRotation, firstAnimationDuration));
 
