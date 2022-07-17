@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   coctailSprite: {fileID: 21300000, guid: 598dc7cf8b01e2342943202ab2ac942f, type: 3}
-  requiredColor: {r: 0.7058824, g: 0.90196085, b: 0.08627451, a: 0}
+  requiredColor: {r: 0.69803923, g: 0.8784314, b: 0.24705882, a: 0}
