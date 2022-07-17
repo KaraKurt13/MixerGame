@@ -12540,7 +12540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstStepCameraPosition: {x: 3.814, y: 1.078, z: 4.593}
   firstStepCameraRotation: {x: -1.845, y: 0, z: 0}
-  firstAnimationDuration: 3
+  firstAnimationDuration: 2.5
   secondStepCameraPosition: {x: 0.9893, y: 1.384, z: 1.1}
   secondStepCameraRotation: {x: 19.70032, y: 0, z: 0}
   secondAnimationDuration: 3
