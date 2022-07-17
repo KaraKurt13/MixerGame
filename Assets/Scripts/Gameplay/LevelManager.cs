@@ -24,9 +24,7 @@ public class LevelManager : MonoBehaviour
 
     private void StartLevel()
     {
-        Debug.Log("Levelstart");
         reqCocktail.SetCocktailImage(currentLevelInfo.coctailSprite);
-        Debug.Log(requiredCocktailImage.sprite);
         blenderObject.requiredColor = currentLevelInfo.requiredColor;
     }
 
@@ -42,6 +40,12 @@ public class LevelManager : MonoBehaviour
 
     private void LevelIsCompleted(int resultScore)
     {
+        if(gameProgressInfo.currentLevel+1>gameProgressInfo.levelsInfo.Length-1)
+        {
+            gameProgressInfo.currentLevel = 0;
+            UIManager.ShowWonScreen(resultScore);
+            return;
+        }
         gameProgressInfo.currentLevel++;
         UIManager.ShowWonScreen(resultScore);
     }

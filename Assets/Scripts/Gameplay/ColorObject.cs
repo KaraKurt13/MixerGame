@@ -29,10 +29,8 @@ public class ColorObject : MonoBehaviour
 
     private void PlayJumpAnimation()
     {
-        //this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-
         Sequence objectSequence = DOTween.Sequence();
-        this.gameObject.transform.DOLocalJump(new Vector3(0.063000001f, 0.481299996f, 0.000199999995f), 0.5f,0,2,false);
+        this.gameObject.transform.DOLocalJump(new Vector3(0.09229f, 0.20679f, 0.0435f), 0.5f,0,2,false);
 
         objectSequence.OnComplete(() =>
         {
@@ -51,11 +49,6 @@ public class ColorObject : MonoBehaviour
         objectSelected(this);
         objectIsSelected = false;
 
-    }
-
-    private void OnEnable()
-    {
-        
     }
 
 }

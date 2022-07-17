@@ -7,12 +7,12 @@ public class Blender : MonoBehaviour
 {
     
     [SerializeField] private List<Color> colorsInBlender;
+    [SerializeField] private List<Transform> colorsObjects;
     [SerializeField] private GameObject resultLiquid;
-    private Color resultColor;
+    [SerializeField] private Color resultColor;
     public Color requiredColor;
     private bool blendingIsInProgress;
     private bool lidIsOpened;
-    private bool blendingIsPossible;
     private IEnumerator lidOpeningCoroutine;
 
     private BlenderAnimationController blenderAnim;
@@ -28,18 +28,14 @@ public class Blender : MonoBehaviour
             return;
         }
 
-        StartCoroutine(ObjectJumpDelay());
-
         if (!lidIsOpened)
         {
             lidIsOpened = true;
             blenderAnim.PlayLidOpeningAnim();
-            Debug.Log("Should start!");
             StartCoroutine(lidOpeningCoroutine);
         }
         else
         {
-            Debug.Log("Should restart!");
             StopCoroutine(lidOpeningCoroutine);
             lidIsOpened = true;
             lidOpeningCoroutine = LidState();
@@ -48,12 +44,8 @@ public class Blender : MonoBehaviour
 
         objectToAdd.AddObject();
         colorsInBlender.Add(objectToAdd.colorOfObject);
+        colorsObjects.Add(objectToAdd.gameObject.transform);
         
-    }
-
-    public void ClearBlender()
-    {
-        colorsInBlender.Clear();
     }
 
     private IEnumerator LidState()
@@ -82,24 +74,18 @@ public class Blender : MonoBehaviour
 
         resultLiquid.GetComponent<MeshRenderer>().material.color = resultColor;
         blenderAnim.PlayBlendingAnimation();
+        blenderAnim.PlayObjectBlendingAnim(colorsObjects);
 
         yield return new WaitForSeconds(3);
         
         CheckColorForRequired();
     }
 
-    private IEnumerator ObjectJumpDelay()
-    {
-        blendingIsPossible = false;
-        yield return new WaitForSeconds(2);
-        blendingIsPossible = true;
-    }
-
     private void CheckColorForRequired()
     {
-        float colorSimilarity = 100-Mathf.Abs(Vector3.Distance(new Vector3(requiredColor.r, requiredColor.g, requiredColor.b), new Vector3(resultColor.r, resultColor.g, resultColor.b))*100);
+        float colorSimilarity = Mathf.Clamp(100 - (Mathf.Sqrt(Mathf.Pow(requiredColor.r - resultColor.r, 2) + Mathf.Pow(requiredColor.g - resultColor.g, 2) + Mathf.Pow(requiredColor.b - resultColor.b, 2))*100),0,100);
 
-        if (colorSimilarity<0.1)
+        if (colorSimilarity>90)
         {
             colorIsSimilarToRequired((int)colorSimilarity);
         }
@@ -108,7 +94,6 @@ public class Blender : MonoBehaviour
             colorIsNotSimilarToRequired((int)colorSimilarity);
         }
 
-        Debug.Log(colorSimilarity);
     }
 
     private void OnEnable()
@@ -123,7 +108,7 @@ public class Blender : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(blendingIsInProgress || colorsInBlender.Count==0 || blendingIsPossible)
+        if(blendingIsInProgress || colorsInBlender.Count==0)
         {
             return;
         }
@@ -137,7 +122,6 @@ public class Blender : MonoBehaviour
         colorsInBlender = new List<Color>();
         blenderAnim = GetComponent<BlenderAnimationController>();
         blendingIsInProgress = false;
-        blendingIsPossible = true;
         lidIsOpened = false;
         lidOpeningCoroutine = LidState();
     }

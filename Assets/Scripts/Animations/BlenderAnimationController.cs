@@ -11,6 +11,7 @@ public class BlenderAnimationController : MonoBehaviour
     [SerializeField] private Vector3 liquidFinallPosition;
     [SerializeField] private Vector3 lidOpenedPosition;
     [SerializeField] private Vector3 lidOpenedRotation;
+    [SerializeField] private AudioClip blenderSound;
     private Vector3 lidClosedRotation;
     private Vector3 lidClosedPosition;
     
@@ -26,8 +27,16 @@ public class BlenderAnimationController : MonoBehaviour
     {
         Sequence blenderSequence = DOTween.Sequence();
         PlayLiquidAnimation();
-
+        GetComponent<AudioSource>().PlayOneShot(blenderSound);
         blenderSequence.Append(blenderTransform.DOShakePosition(5, 0.01f, 15, 4, false, true));
+    }
+
+    public void PlayObjectBlendingAnim(List<Transform> objects)
+    {
+        foreach(Transform colorObject in objects)
+        {
+            colorObject.DOScale(0f, 2f).SetEase(Ease.InExpo);
+        }
     }
 
     public void PlayLiquidAnimation()

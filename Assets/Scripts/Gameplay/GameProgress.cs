@@ -7,5 +7,4 @@ public class GameProgress : ScriptableObject
 {
     public LevelInformation[] levelsInfo;
     public int currentLevel;
-    public bool[] levelsCompletition;
 }

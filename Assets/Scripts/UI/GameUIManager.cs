@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameUI;
+    [SerializeField] private GameObject cloudUI;
+    private Vector3 cloudStandartScale;
     [SerializeField] private GameObject wonScreen;
     [SerializeField] private TextMeshProUGUI wonResult;
     [SerializeField] private GameObject lostScreen;
@@ -16,11 +19,16 @@ public class GameUIManager : MonoBehaviour
         gameUI.SetActive(true);
     }
 
+    
+    private void ShowCloud()
+    {
+        cloudUI.transform.DOScale(cloudStandartScale, 1).SetEase(Ease.InOutBounce);
+    }
+
     public void ShowWonScreen(int similarityPercentage)
     {
         wonScreen.SetActive(true);
-        StartCoroutine(ShowWonResult(similarityPercentage));
-        
+        StartCoroutine(ShowWonResult(similarityPercentage)); 
     }
 
     public void ShowLostScreen(int similarityPercentage)
@@ -51,14 +59,21 @@ public class GameUIManager : MonoBehaviour
         lostResult.text += "%";
     }
 
+    private void Start()
+    {
+        cloudStandartScale = cloudUI.transform.localScale;
+        cloudUI.transform.localScale = Vector3.zero;
+    }
 
     private void OnEnable()
     {
         CameraIntroAnimation.introFinished += ShowGameUI;
+        CameraIntroAnimation.introFinished += ShowCloud;
     }
 
     private void OnDisable()
     {
         CameraIntroAnimation.introFinished -= ShowGameUI;
+        CameraIntroAnimation.introFinished -= ShowCloud;
     }
 }

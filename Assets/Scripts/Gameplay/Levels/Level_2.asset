@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702350893594e584f915f7d5825ae7d7, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
-  coctailSprite: {fileID: 21300000, guid: e02c4bba5fdfeb24c96df2c680a2d7a6, type: 3}
+  coctailSprite: {fileID: 21300000, guid: 3c9dfbe309fee384e97a5009b8e6845f, type: 3}
   requiredColor: {r: 0.745283, g: 0.5531635, b: 0.14413491, a: 0}
