@@ -56,4 +56,9 @@ public class GameUIManager : MonoBehaviour
     {
         CameraIntroAnimation.introFinished += ShowGameUI;
     }
+
+    private void OnDisable()
+    {
+        CameraIntroAnimation.introFinished -= ShowGameUI;
+    }
 }

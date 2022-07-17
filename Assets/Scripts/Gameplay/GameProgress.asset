@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb633223f244d94a8731b1f198ac435, type: 3}
+  m_Name: GameProgress
+  m_EditorClassIdentifier: 
+  levelsInfo:
+  - {fileID: 11400000, guid: 70a450b0d967c1a4eb8e1d0cb8c5f36c, type: 2}
+  - {fileID: 11400000, guid: a1b927a9f9756aa44905eb0a1dcf1262, type: 2}
+  - {fileID: 11400000, guid: 092c4498be214f846b76271fced596f8, type: 2}
+  currentLevel: 1
+  levelsCompletition: 000000

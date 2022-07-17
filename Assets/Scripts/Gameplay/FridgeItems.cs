@@ -13,4 +13,10 @@ public class FridgeItems : MonoBehaviour
     {
         FridgeIntroAnimation.fridgeAnimationEnded += DestroyAllFridgeItems;
     }
+
+    private void OnDisable()
+    {
+        FridgeIntroAnimation.fridgeAnimationEnded -= DestroyAllFridgeItems;
+    }
+
 }
