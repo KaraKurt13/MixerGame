@@ -36,6 +36,7 @@ public class ColorObject : MonoBehaviour
         {
             objectAnimationEnded();
             this.transform.parent.GetComponent<ObjectPooling>().SpawnObjectFromPool();
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         });
     }
 
