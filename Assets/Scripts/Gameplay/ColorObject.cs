@@ -30,11 +30,12 @@ public class ColorObject : MonoBehaviour
     private void PlayJumpAnimation()
     {
         Sequence objectSequence = DOTween.Sequence();
-        this.gameObject.transform.DOLocalJump(new Vector3(0.09229f, 0.20679f, 0.0435f), 0.5f,0,2,false);
+        this.gameObject.transform.DOLocalJump(new Vector3(0.09229f, 0.3632f, 0.0435f), 0.5f,0,2,false);
 
         objectSequence.OnComplete(() =>
         {
             objectAnimationEnded();
+            Debug.Log("!");
             this.transform.parent.GetComponent<ObjectPooling>().SpawnObjectFromPool();
             this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         });

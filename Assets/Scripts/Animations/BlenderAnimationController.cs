@@ -19,7 +19,7 @@ public class BlenderAnimationController : MonoBehaviour
     {
         Sequence blenderSequence = DOTween.Sequence();
 
-        blenderSequence.AppendInterval(2);
+        blenderSequence.AppendInterval(2.3f);
         blenderSequence.Append(blenderTransform.DOShakePosition(4, 0.005f, 4, 2, false, true));
     }
 
